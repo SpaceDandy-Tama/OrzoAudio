@@ -1,0 +1,1 @@
+https://github.com/libsndfile/libsndfile/releases/tag/1.2.2
