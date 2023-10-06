@@ -108,7 +108,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);AL_LIBTYPE_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\libsndfile\include;$(SolutionDir)Dependencies\OpenAL\include;</AdditionalIncludeDirectories>
@@ -116,11 +116,10 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)Dependencies\libsndfile\lib\sndfile.lib;$(SolutionDir)Dependencies\OpenAL\OpenAL32.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);winmm.lib;$(SolutionDir)Dependencies\libsndfile\lib\sndfile.lib;$(SolutionDir)Dependencies\OpenAL\lib\debug\OpenAL32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /C/H/R/S/Y/I "$(SolutionDir)Dependencies\libsndfile\bin\sndfile.dll" "$(OutputPath)"
-xcopy /C/H/R/S/Y/I "$(SolutionDir)Dependencies\OpenAL\OpenAL32.dll" "$(OutputPath)"</Command>
+      <Command>xcopy /C/H/R/S/Y/I "$(SolutionDir)Dependencies\libsndfile\bin\sndfile.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,7 +128,7 @@ xcopy /C/H/R/S/Y/I "$(SolutionDir)Dependencies\OpenAL\OpenAL32.dll" "$(OutputPat
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);AL_LIBTYPE_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\libsndfile\include;$(SolutionDir)Dependencies\OpenAL\include;</AdditionalIncludeDirectories>
@@ -139,11 +138,10 @@ xcopy /C/H/R/S/Y/I "$(SolutionDir)Dependencies\OpenAL\OpenAL32.dll" "$(OutputPat
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)Dependencies\libsndfile\lib\sndfile.lib;$(SolutionDir)Dependencies\OpenAL\OpenAL32.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);winmm.lib;$(SolutionDir)Dependencies\libsndfile\lib\sndfile.lib;$(SolutionDir)Dependencies\OpenAL\lib\release\OpenAL32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /C/H/R/S/Y/I "$(SolutionDir)Dependencies\libsndfile\bin\sndfile.dll" "$(OutputPath)"
-xcopy /C/H/R/S/Y/I "$(SolutionDir)Dependencies\OpenAL\OpenAL32.dll" "$(OutputPath)"</Command>
+      <Command>xcopy /C/H/R/S/Y/I "$(SolutionDir)Dependencies\libsndfile\bin\sndfile.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
