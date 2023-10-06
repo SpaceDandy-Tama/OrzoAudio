@@ -60,6 +60,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /C/H/R/S/Y/I "$(ProjectDir)Vile Tune.ogg" "$(SolutionDir)x64\Debug\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /C/H/R/S/Y/I "$(ProjectDir)Vile Tune.ogg" "$(SolutionDir)x64\Debug\"
+xcopy /C/H/R/S/Y/I "$(ProjectDir)Vile Tune.ogg" "$(SolutionDir)x64\Release\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
