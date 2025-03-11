@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\x64\Debug\</OutputPath>
+    <OutputPath>..\Debug\x64\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\x64\Release\</OutputPath>
+    <OutputPath>..\Release\x64\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -60,7 +60,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /C/H/R/S/Y/I "$(ProjectDir)Vile Tune.ogg" "$(SolutionDir)x64\Debug\"
-xcopy /C/H/R/S/Y/I "$(ProjectDir)Vile Tune.ogg" "$(SolutionDir)x64\Release\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /C/H/R/S/Y/I "$(ProjectDir)Vile Tune.ogg" "$(SolutionDir)Debug\x64\"
+xcopy /C/H/R/S/Y/I "$(ProjectDir)Vile Tune.ogg" "$(SolutionDir)Release\x64\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
