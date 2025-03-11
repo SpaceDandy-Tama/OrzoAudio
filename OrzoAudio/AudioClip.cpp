@@ -3,7 +3,7 @@
 AudioClip::AudioClip()
 {
 	m_BufferID = 0;
-	m_Format = AudioFormat::None;
+	m_Format = AudioFormat::OF_None;
 	m_Channels = 0;
 	m_Frames = 0;
 	m_SampleRate = 0;
@@ -42,11 +42,11 @@ AudioClip* AudioClip::FromFile(const std::string& filePath)
 	}
 
 	/* Get the sound format, and figure out the OpenAL format. */
-	clip->m_Format = AudioFormat::None;
+	clip->m_Format = AudioFormat::OF_None;
 	if (sfinfo.channels == 1)
-		clip->m_Format = AudioFormat::Mono;
+		clip->m_Format = AudioFormat::OF_Mono;
 	else if (sfinfo.channels == 2)
-		clip->m_Format = AudioFormat::Stereo;
+		clip->m_Format = AudioFormat::OF_Stereo;
 	/*
 	else if (sfinfo.channels = 3)
 	{
@@ -60,7 +60,7 @@ AudioClip* AudioClip::FromFile(const std::string& filePath)
 	}
 	*/
 
-	if (clip->m_Format == AudioFormat::None)
+	if (clip->m_Format == AudioFormat::OF_None)
 	{
 		fprintf(stderr, "Unsupported channel count: %d\n", sfinfo.channels);
 		sf_close(sndfile);

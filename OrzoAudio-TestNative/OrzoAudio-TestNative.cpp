@@ -10,7 +10,7 @@ int main()
 	audioSource.Play();
 
 	std::cout << "FilePath: " << audioClip->GetFilePath() << std::endl;
-	std::cout << "Format: " << (audioClip->GetFormat() == AudioFormat::Mono ? "Mono" : "Stereo") << std::endl;
+	std::cout << "Format: " << (audioClip->GetFormat() == AudioFormat::OF_Mono ? "Mono" : "Stereo") << std::endl;
 	std::cout << "Channel Count: " << audioClip->GetChannelCount() << std::endl;
 	std::cout << "Frame Count(Sample Count / Channel Count): " << audioClip->GetFrameCount() << std::endl;
 	std::cout << "Sample Rate(Frequency): " << audioClip->GetSampleRate() << std::endl;
