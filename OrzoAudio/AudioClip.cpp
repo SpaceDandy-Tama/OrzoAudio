@@ -1,4 +1,4 @@
-#include "AudioClip.h"
+﻿#include "AudioClip.h"
 
 AudioClip::AudioClip()
 {
@@ -14,7 +14,7 @@ AudioClip::~AudioClip()
 {
 	if (m_BufferID > 0)
 		alDeleteBuffers(1, &m_BufferID);
-} 
+}
 
 AudioClip* AudioClip::FromFile(const std::string& filePath)
 {
@@ -67,20 +67,42 @@ AudioClip* AudioClip::FromFile(const std::string& filePath)
 		return nullptr;
 	}
 
-	/* Decode the whole audio file to a buffer. */
-	membuf = static_cast<short*>(malloc((size_t)(sfinfo.frames * sfinfo.channels) * sizeof(short)));
+	/* Decode the whole audio file to a float buffer */
+	const sf_count_t frames = sfinfo.frames;
+	const int channels = sfinfo.channels;
+	const int totalSamples = (int)(frames * channels);
 
-	clip->m_Frames = sf_readf_short(sndfile, membuf, sfinfo.frames);
+	float* fbuf = (float*)malloc((size_t)totalSamples * sizeof(float));
+
+	clip->m_Frames = sf_readf_float(sndfile, fbuf, frames);
 	if (clip->m_Frames < 1)
 	{
-		free(membuf);
+		free(fbuf);
 		sf_close(sndfile);
-		fprintf(stderr, "Failed to read samples in %s (%" PRId64 ")\n", filename, clip->m_Frames);
+		fprintf(stderr, "Failed to read samples in %s (%" PRId64 ")\n",
+			filename, clip->m_Frames);
 		return nullptr;
 	}
-	num_bytes = (ALsizei)(clip->m_Frames * sfinfo.channels) * (ALsizei)sizeof(short);
 
-	clip->m_Channels = sfinfo.channels;
+	/* Convert float → int16 with clamping */
+	membuf = (short*)malloc((size_t)totalSamples * sizeof(short));
+
+	for (int i = 0; i < totalSamples; ++i)
+	{
+		float x = fbuf[i];
+
+		// hard clamp (safe and fast)
+		if (x > 1.0f) x = 1.0f;
+		if (x < -1.0f) x = -1.0f;
+
+		membuf[i] = (short)(x * 32767.0f);
+	}
+
+	free(fbuf);
+
+	num_bytes = (ALsizei)(clip->m_Frames * channels * sizeof(short));
+
+	clip->m_Channels = channels;
 	clip->m_SampleRate = sfinfo.samplerate;
 	clip->m_Duration = clip->m_Frames / (double)clip->m_SampleRate;
 
