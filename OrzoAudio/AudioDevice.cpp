@@ -27,15 +27,23 @@ AudioDevice::AudioDevice()
 #endif
 }
 
-AudioDevice::~AudioDevice()  noexcept
+AudioDevice::~AudioDevice() noexcept
 {
-	if (!alcMakeContextCurrent(nullptr))
-		std::cout << "Failed to set context to nullptr" << std::endl;
+	// Make no context current
+	alcMakeContextCurrent(nullptr);
 
-	alcDestroyContext(p_ALCContext);
+	// Destroy context
 	if (p_ALCContext)
-		std::cout << "Failed to destroy context" << std::endl;
+	{
+		alcDestroyContext(p_ALCContext);
+		p_ALCContext = nullptr; // reset pointer
+	}
 
-	if (!alcCloseDevice(p_ALCDevice))
-		std::cout << "Failed to close sound device" << std::endl;
+	// Close device
+	if (p_ALCDevice)
+	{
+		alcCloseDevice(p_ALCDevice);
+		p_ALCDevice = nullptr;
+	}
 }
+

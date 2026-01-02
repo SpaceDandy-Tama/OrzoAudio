@@ -17,10 +17,6 @@ AudioSource::AudioSource(AudioClip* clip)
 
 AudioSource::~AudioSource() noexcept
 {
-#if _DEBUG
-	std::cout << "Destroying AudioSource " << this << std::endl;
-#endif
-
 	if (p_Source == 0)
 		return;
 
