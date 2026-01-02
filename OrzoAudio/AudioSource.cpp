@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "AudioSource.h"
+#include <AL/alc.h>
 
 AudioSource::AudioSource(AudioClip* clip)
 {
@@ -14,10 +15,24 @@ AudioSource::AudioSource(AudioClip* clip)
 	GetCurrentState();
 }
 
-AudioSource::~AudioSource()
+AudioSource::~AudioSource() noexcept
 {
+#if _DEBUG
+	std::cout << "Destroying AudioSource " << this << std::endl;
+#endif
+
+	if (p_Source == 0)
+		return;
+
+	if (alcGetCurrentContext() == nullptr)
+		return;
+
+	alSourceStop(p_Source);
+	alSourcei(p_Source, AL_BUFFER, 0);
 	alDeleteSources(1, &p_Source);
+	p_Source = 0;
 }
+
 
 void AudioSource::SetPitch(float pitch)
 {
@@ -90,8 +105,9 @@ bool AudioSource::GetLooping()
 
 AudioSourceState AudioSource::SetClip(AudioClip* clip)
 {
+	Stop();
 	m_Clip = clip;
-	alSourcei(p_Source, AL_BUFFER, (ALint)m_Clip->GetBufferID());
+	alSourcei(p_Source, AL_BUFFER, (ALint)(m_Clip ? m_Clip->GetBufferID() : 0));
 	return GetCurrentState();
 }
 
@@ -150,18 +166,27 @@ AudioSourceState AudioSource::Play(AudioClip* clip)
 
 AudioSourceState AudioSource::Stop()
 {
+	if (p_Source == 0)
+		return GetCurrentState();
+
 	alSourceStop(p_Source);
 	return GetCurrentState();
 }
 
 AudioSourceState AudioSource::Pause()
 {
+	if (p_Source == 0)
+		return GetCurrentState();
+
 	alSourcePause(p_Source);
 	return GetCurrentState();
 }
 
 AudioSourceState AudioSource::Rewind()
 {
+	if (p_Source == 0)
+		return GetCurrentState();
+
 	alSourceRewind(p_Source);
 	return GetCurrentState();
 }

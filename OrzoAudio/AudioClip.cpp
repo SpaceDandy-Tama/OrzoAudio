@@ -1,5 +1,7 @@
 ﻿#include "AudioClip.h"
 
+#include <AL/alc.h>
+
 AudioClip::AudioClip()
 {
 	m_BufferID = 0;
@@ -10,10 +12,16 @@ AudioClip::AudioClip()
 	m_Duration = 0;
 }
 
-AudioClip::~AudioClip()
+AudioClip::~AudioClip() noexcept
 {
-	if (m_BufferID > 0)
-		alDeleteBuffers(1, &m_BufferID);
+	if (m_BufferID == 0)
+		return;
+
+	if (alcGetCurrentContext() == nullptr)
+		return;
+
+	alDeleteBuffers(1, &m_BufferID);
+	m_BufferID = 0;
 }
 
 AudioClip* AudioClip::FromFile(const std::string& filePath)
@@ -32,12 +40,14 @@ AudioClip* AudioClip::FromFile(const std::string& filePath)
 	if (!sndfile)
 	{
 		fprintf(stderr, "Count not open audio in %s: %s\n", filename, sf_strerror(sndfile));
+		delete(clip);
 		return nullptr;
 	}
 	if (sfinfo.frames < 1 || sfinfo.frames >(sf_count_t)(INT_MAX / sizeof(short)) / sfinfo.channels)
 	{
 		fprintf(stderr, "Bad sample count in %s (%" PRId64 ")\n", filename, sfinfo.frames);
 		sf_close(sndfile);
+		delete(clip);
 		return nullptr;
 	}
 
@@ -64,15 +74,31 @@ AudioClip* AudioClip::FromFile(const std::string& filePath)
 	{
 		fprintf(stderr, "Unsupported channel count: %d\n", sfinfo.channels);
 		sf_close(sndfile);
+		delete(clip);
 		return nullptr;
 	}
 
 	/* Decode the whole audio file to a float buffer */
 	const sf_count_t frames = sfinfo.frames;
 	const int channels = sfinfo.channels;
-	const int totalSamples = (int)(frames * channels);
+
+	if (frames > INT_MAX / channels)
+	{
+		sf_close(sndfile);
+		delete clip;
+		return nullptr;
+	}
+
+	const int totalSamples = static_cast<int>(frames * channels);
 
 	float* fbuf = (float*)malloc((size_t)totalSamples * sizeof(float));
+
+	if (!fbuf)
+	{
+		sf_close(sndfile);
+		delete clip;
+		return nullptr;
+	}
 
 	clip->m_Frames = sf_readf_float(sndfile, fbuf, frames);
 	if (clip->m_Frames < 1)
@@ -81,6 +107,7 @@ AudioClip* AudioClip::FromFile(const std::string& filePath)
 		sf_close(sndfile);
 		fprintf(stderr, "Failed to read samples in %s (%" PRId64 ")\n",
 			filename, clip->m_Frames);
+		delete(clip);
 		return nullptr;
 	}
 
@@ -121,6 +148,7 @@ AudioClip* AudioClip::FromFile(const std::string& filePath)
 		fprintf(stderr, "OpenAL Error: %s\n", alGetString(err));
 		if (clip->m_BufferID && alIsBuffer(clip->m_BufferID))
 			alDeleteBuffers(1, &clip->m_BufferID);
+		delete(clip);
 		return nullptr;
 	}
 

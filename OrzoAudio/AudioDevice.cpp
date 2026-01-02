@@ -27,7 +27,7 @@ AudioDevice::AudioDevice()
 #endif
 }
 
-AudioDevice::~AudioDevice()
+AudioDevice::~AudioDevice()  noexcept
 {
 	if (!alcMakeContextCurrent(nullptr))
 		std::cout << "Failed to set context to nullptr" << std::endl;
