@@ -182,6 +182,7 @@
     <ClInclude Include="include\AudioFormat.h" />
     <ClInclude Include="include\AudioSource.h" />
     <ClInclude Include="include\miniaudio\miniaudio.h" />
+    <ClInclude Include="include\OrzoAudio.h" />
     <ClInclude Include="include\stb\stb_vorbis.h" />
     <ClInclude Include="include\Vector.h" />
   </ItemGroup>

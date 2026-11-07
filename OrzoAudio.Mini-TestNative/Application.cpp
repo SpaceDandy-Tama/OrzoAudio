@@ -8,11 +8,7 @@
 #include <csignal>
 using namespace std::chrono;
 
-#include "AudioFormat.h"
-#include "AudioDevice.h"
-#include "AudioClip.h"
-#include "AudioBus.h"
-#include "AudioSource.h"
+#include "OrzoAudio.h"
 
 std::atomic<bool> running = true;
 void SignalHandler(int signal)
