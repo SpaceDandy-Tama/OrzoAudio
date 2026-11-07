@@ -37,11 +37,6 @@ int main(int argc, char* argv[])
         std::cout << "No argument" << std::endl;
         return -1;
     }
-    else if (argc > 2)
-    {
-        std::cout << "Too many arguments" << std::endl;
-        return -1;
-    }
     std::string filePath = argv[1];
     std::cout << filePath << std::endl;
 
@@ -100,6 +95,35 @@ int main(int argc, char* argv[])
 
         //
         std::this_thread::sleep_until(nextUpdate);
+    }
+
+    std::cout << std::endl << std::endl;
+
+    if (argc > 2)
+    {
+        std::string filePath2 = argv[2];
+        std::cout << filePath2 << std::endl;
+
+        AudioClip* clip2 = AudioClip::FromFile(filePath2);
+        if (clip2)
+        {
+            std::cout << "FileName:   " << clip2->GetFilePath() << std::endl;
+            std::cout << "Format:     " << clip2->GetFormat() << std::endl;
+            std::cout << "Channels:   " << clip2->GetChannelCount() << std::endl;
+            std::cout << "Frames:     " << clip2->GetFrameCount() << std::endl;
+            std::cout << "SampleRate: " << clip2->GetSampleRate() << std::endl;
+            std::cout << "Duration:   " << clip2->GetDuration() << std::endl;
+            std::cout << std::endl;
+        }
+        else
+        {
+            std::cout << "Couldn't Open AudioClip";
+            return -1;
+        }
+        source->SetSpatial(false);
+        source->Play(clip2);
+
+        std::cin.get();
     }
 
     source->Stop();

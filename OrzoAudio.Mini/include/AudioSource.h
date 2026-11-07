@@ -62,11 +62,11 @@ private:
 	bool m_Spatial;
 	bool m_Doppler;
 
-	float m_Pan;
-	float m_Pitch;
-	float m_Gain;
-	Vector3 m_Position;
-	Vector3 m_Velocity;
-	Vector3 m_Direction;
-	bool m_Looping;
+	float m_Pan = 0.0f;
+	float m_Pitch = 1.0f;
+	float m_Gain = 1.0f;
+	Vector3 m_Position = Vector3{ 0, 0, 0 };
+	Vector3 m_Velocity = Vector3{ 0, 0, 0 };
+	Vector3 m_Direction = Vector3{ 0, 0, 1 };
+	bool m_Looping = false;
 };
