@@ -8,12 +8,10 @@ void AudioSource::InitializeSound()
     if (!AudioDevice::IsInitialized() || m_Clip == nullptr)
         return;
 
-    bool wasInitialized = false;
     if (m_Initialized)
     {
         ma_sound_uninit(&m_MaSound);
         m_Initialized = false;
-        wasInitialized = true;
     }
 
     unsigned int flags = (m_Spatial ? 0 : MA_SOUND_FLAG_NO_SPATIALIZATION) | (m_Doppler ? 0 : MA_SOUND_FLAG_NO_PITCH);
@@ -31,16 +29,13 @@ void AudioSource::InitializeSound()
     ma_sound_set_min_gain(&m_MaSound, 0.0f);
     ma_sound_set_max_gain(&m_MaSound, 2.0f);
 
-    if (wasInitialized)
-    {
-        SetPan(m_Pan);
-        SetPitch(m_Pitch);
-        SetGain(m_Gain);
-        SetPosition(m_Position);
-        SetVelocity(m_Velocity);
-        SetDirection(m_Direction);
-        SetLooping(m_Looping);
-    }
+    SetPan(m_Pan);
+    SetPitch(m_Pitch);
+    SetGain(m_Gain);
+    SetPosition(m_Position);
+    SetVelocity(m_Velocity);
+    SetDirection(m_Direction);
+    SetLooping(m_Looping);
 }
 
 AudioSource::AudioSource(AudioClip* clip, AudioBus* bus, bool spatial, bool doppler) : m_Bus{ bus }, m_Clip{ clip }, m_Spatial { spatial }, m_Doppler { doppler }
