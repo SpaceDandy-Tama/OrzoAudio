@@ -31,7 +31,7 @@ int main()
 	SetConsoleCtrlHandler(ConsoleHandler, TRUE);
 
 	AudioDevice* audioDevice = new AudioDevice();
-	AudioClip* audioClip = AudioClip::FromFile("ethnic offensive3.ogg");
+	AudioClip* audioClip = AudioClip::FromFile("EthnicOffensive.ogg");
 	AudioSource* audioSource = new AudioSource(audioClip);
 	audioSource->Play();
 

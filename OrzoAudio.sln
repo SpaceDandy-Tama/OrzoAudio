@@ -11,6 +11,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrzoAudio", "OrzoAudio\Orzo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrzoAudioNet", "OrzoAudioNet\OrzoAudioNet.csproj", "{B3E21FAD-4B53-4506-916E-1F432A260569}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrzoAudio.Mini", "OrzoAudio.Mini\OrzoAudio.Mini.vcxproj", "{8459102B-6128-41A8-9E7A-221CBEAA2FB0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrzoAudio.Mini-TestNative", "OrzoAudio.Mini-TestNative\OrzoAudio.Mini-TestNative.vcxproj", "{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,30 @@ Global
 		{B3E21FAD-4B53-4506-916E-1F432A260569}.Release|x64.Build.0 = Release|Any CPU
 		{B3E21FAD-4B53-4506-916E-1F432A260569}.Release|x86.ActiveCfg = Release|Any CPU
 		{B3E21FAD-4B53-4506-916E-1F432A260569}.Release|x86.Build.0 = Release|Any CPU
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Debug|Any CPU.Build.0 = Debug|x64
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Debug|x64.ActiveCfg = Debug|x64
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Debug|x64.Build.0 = Debug|x64
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Debug|x86.ActiveCfg = Debug|Win32
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Debug|x86.Build.0 = Debug|Win32
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Release|Any CPU.ActiveCfg = Release|x64
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Release|Any CPU.Build.0 = Release|x64
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Release|x64.ActiveCfg = Release|x64
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Release|x64.Build.0 = Release|x64
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Release|x86.ActiveCfg = Release|Win32
+		{8459102B-6128-41A8-9E7A-221CBEAA2FB0}.Release|x86.Build.0 = Release|Win32
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Debug|Any CPU.Build.0 = Debug|x64
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Debug|x64.ActiveCfg = Debug|x64
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Debug|x64.Build.0 = Debug|x64
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Debug|x86.ActiveCfg = Debug|Win32
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Debug|x86.Build.0 = Debug|Win32
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Release|Any CPU.ActiveCfg = Release|x64
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Release|Any CPU.Build.0 = Release|x64
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Release|x64.ActiveCfg = Release|x64
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Release|x64.Build.0 = Release|x64
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Release|x86.ActiveCfg = Release|Win32
+		{0343E92D-20BA-4237-9B6E-B3ADF38A29C6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
